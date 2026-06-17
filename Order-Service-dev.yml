@@ -2,9 +2,6 @@ server:
   port: 8081
 
 spring:
-  application:
-    name: ORDER-SERVICE
-
   datasource:
     url: jdbc:mysql://localhost:3306/order_db
     username: root
