@@ -2,6 +2,9 @@ server:
   port: 8081
 
 spring:
+  application:
+    name: ORDER-SERVICE
+
   datasource:
     url: jdbc:mysql://localhost:3306/order_db
     username: root
@@ -16,6 +19,16 @@ spring:
       hibernate:
         format_sql: true
 
+management:
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1.0
+
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+
 eureka:
   client:
     service-url:
@@ -23,3 +36,7 @@ eureka:
 
   instance:
     prefer-ip-address: true
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},traceId=%X{traceId:-},spanId=%X{spanId:-}]"
